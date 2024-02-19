@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Cursor Effects</title>
+    <style>
+        body.tutorial {
+            --color-text: #fff;
+            --color-bg: #171717;
+            --color-link: #ff0000;
+            background-color: smoke;
+            margin: 0;
+            padding: 0;
+            cursor: none;
+        }
+
+        .credits {
+            position: absolute;
+            bottom: 20px;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+        }
+
+        header {
+            background-color: #333;
+            padding: 1em;
+            text-align: center;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url("https://t3.ftcdn.net/jpg/02/52/22/06/360_F_252220674_9SOsfW6g2lIgvLo4XCa8GBEsosSqzKgz.jpg");
+        }
+
+        .page__inner {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* padding-left: 20px;
+    padding-right: 20px; */
+            /* width: 100%; */
+        }
+
+        .cursor {
+            position: fixed;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+        }
+
+        .cursor--small {
+            width: 5px;
+            height: 5px;
+            left: -2.5px;
+            top: -2.5px;
+            border-radius: 50%;
+            z-index: 11000;
+            background: black;
+        }
+
+        .cursor--canvas {
+            width: 100vw;
+            height: 100vh;
+            z-index: 12000;
+        }
+
+        .page,
+        .page a {
+            cursor: none;
+        }
+
+        .banner {
+            display: flex;
+            flex-direction: row;
+            padding-left: 5%;
+            padding-right: 5%;
+            justify-content: center;
+             align-items: center;
+             padding-top: 2%;
+            /* background-color: azure; */
+        }
+
+        @media(min-width: 900px) {
+            nav {
+                display: flex;
+                justify-content: space-around;
+            }
+        }
+
+        .nav-wrapper {
+            width: 100%;
+            /* height: 50vh; */
+        }
+
+        nav {
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            /* position: absolute; */
+            /* top: auto; */
+            padding-top: 2%;
+            padding-bottom: 2%;
+            background-color: cadetblue;
+        }
+
+        span {
+            display: inline-block;
+            font-family: 'Russo One', sans-serif;
+            font-weight: 400;
+            color: black;
+            font-size: 14px;
+            text-transform: uppercase;
+            pointer-event: none;
+            transition: transform 0.1s linear;
+        }
+
+        @media(min-width: 900px) {
+            .featured-mobile{
+                display: none;
+            }
+        }
+
+        @media(max-width: 900px) {
+            nav {
+                top: 30%;
+            }
+
+            .hover-this {
+                width: 100%;
+                padding: 20px 0;
+                display: inline-block;
+            }
+            .banner {
+                flex-direction: column;
+            }
+            .featured-content{
+                flex-direction: column !important;
+            }
+            .recent-div{
+                flex-direction: column !important;
+            }
+            .featured-mobile{
+                display: block;
+            }
+            .featured-screen {
+                display: none;
+            }
+        }
+        .featured-content {
+            display: flex;
+            flex-direction: row;
+            padding-left: 5%;
+            padding-right: 5%;
+            justify-content: center;
+             align-items: center;
+             padding-top: 2%;
+           
+            /* background-image: url("https://i.pinimg.com/736x/51/cc/a9/51cca97663d4c41e8740a1a8f319f881.jpg"); */
+        }
+        .recent-div{
+            display: flex;
+            flex-direction: row;
+            padding-left: 5%;
+            padding-right: 5%;
+            justify-content: center;
+             padding-top: 2%;
+        }
+        .upcoming-events{
+            display: flex;
+            flex-direction: row;
+            padding-left: 5%;
+            padding-right: 5%;
+            justify-content: center;
+             padding-top: 2%;
+             gap: 10px;
+        }
+        .footer {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            background-color: cadetblue;
+        }
+       .banner-img {
+        height: 300px;
+    width: 435px;
+       }
+       /* .featured-img{
+        position: absolute;
+       }
+       .featured-data{
+        position: absolute;
+       } */
+    </style>
+</head>
+
+<body class="tutorial">
+    <main class="page">
+        <header>
+            <h1>Unity Nexus</h1>
+            <p>Connecting Minds, Inspiring Hearts: Together in Unity, Building a Brighter Tomorrow</p>
+        </header>
+        <div class="nav-wrapper">
+            <nav>
+                <a href="#banner" class="hover-this"><span>About Us</span></a>
+                <a href="#featured-content" class="hover-this"><span>Featured</span></a>
+                <a href="#recent-updates" class="hover-this"><span>Recent Updates</span></a>
+                <a href="#upcoming-events" class="hover-this"><span>Upcoming Events</span></a>
+                <div class="cursor"></div>
+            </nav>
+        </div>
+
+        <div class="page__inner">
+
+            <div id="banner" class="banner">
+                <div>
+                    <h2>Welcome to our Community!</h2>
+                    <p>Welcome to Unity Nexus, where every connection becomes a shared journey. Join our vibrant
+                        community, where collaboration knows no bounds and friendships flourish. Together, we create a
+                        space where ideas thrive and support abounds. Your journey in Unity Nexus starts now – welcome
+                        home!</p>
+                </div>
+                <div>
+                    <img class="banner-img"
+                        src="https://media.istockphoto.com/id/1153816876/photo/smiling-group-of-people-walking-together-outdoors.jpg?s=612x612&w=0&k=20&c=fmWuzI08_wlIHy2Y3Ovs0ZnZgtMPYKN3ecHML51qw78=" />
+                </div>
+            </div>
+
+            <div class="content">
+                <section id="featured-content" class="featured-content">
+                    <div class="featured-screen">
+                    <img class="banner-img" src="https://i.pinimg.com/736x/51/cc/a9/51cca97663d4c41e8740a1a8f319f881.jpg"/>
+                </div>
+                    <div class="featured-data">
+                    <h2>Featured Content</h2>
+                    <div class="featured-mobile">
+                        <img class="banner-img" src="https://i.pinimg.com/736x/51/cc/a9/51cca97663d4c41e8740a1a8f319f881.jpg"/>
+                    </div>
+                    <ul>
+                        <li>
+                            <h4>Showcase Innovative Projects</h4>
+                            <ul>
+                                <li>
+                                    Highlight unique and innovative Unity projects created by developers. This could
+                                    include games, simulations, or other interactive experiences.
+                                </li>
+                                <li>
+                                    Provide details about the development process, challenges faced, and solutions
+                                    implemented. </li>
+                            </ul>
+
+                        </li>
+
+                        <li>
+                            <h4>Tutorials and Educational Content</h4>
+                            <ul>
+                                <li>
+                                    Feature tutorials on advanced Unity techniques or new features. </li>
+                                <li>
+                                    Include content suitable for various skill levels, from beginners to advanced users.
+                            </ul>
+                        </li>
+
+
+                        <li>
+                            <h4>Developer Spotlights</h4>
+                            <ul>
+                                <li>
+                                    Profile successful Unity developers and their journeys. </li>                                <li>
+                                        Discuss their favorite Unity features, tips for aspiring developers, and any notable projects they've worked on. </li>                            </ul>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                </section>
+
+                <section id="recent-updates" class="recent-updates">
+                    <h2>Recent Updates</h2>
+                    <div class="recent-div">
+                    <dl>
+                        <dt>Improved Rendering Engine</dt>
+                        <dd>
+                            <ul>
+                                <li>Enhanced graphics pipeline for better rendering performance.</li>
+                                <li>Introducing new shader options for more realistic visual effects.</li>
+                            </ul>
+                        </dd>
+                
+                        <dt>Asset Management Enhancements</dt>
+                        <dd>
+                            <ul>
+                                <li>Streamlined asset importing process for faster workflow.</li>
+                                <li>Improved asset preview and organization in the project window.</li>
+                            </ul>
+                        </dd>
+                
+                        <dt>Scene Editing Improvements</dt>
+                        <dd>
+                            <ul>
+                                <li>New scene manipulation tools for more intuitive editing.</li>
+                                <li>Improved navigation and camera controls for a smoother editing experience.</li>
+                            </ul>
+                        </dd>
+                
+                        <dt>Platform Support</dt>
+                        <dd>
+                            <ul>
+                                <li>Added support for the latest platforms, including [Platform A] and [Platform B].</li>
+                                <li>Updated SDKs for seamless integration with third-party services.</li>
+                            </ul>
+                        </dd>
+                
+                        <dt>Performance Optimization</dt>
+                        <dd>
+                            <ul>
+                                <li>Optimized runtime performance for smoother gameplay.</li>
+                                <li>Reduced memory footprint for more efficient resource usage.</li>
+                            </ul>
+                        </dd>
+                
+                        <dt>Collaboration Tools</dt>
+                        <dd>
+                            <ul>
+                                <li>Enhanced collaboration features with improved version control.</li>
+                                <li>Streamlined project sharing and syncing for teams.</li>
+                            </ul>
+                        </dd>
+                
+                        <dt>Bug Fixes</dt>
+                        <dd>
+                            <ul>
+                                <li>Addressed various bugs and stability issues reported by the community.</li>
+                                <li>Improved error handling for a more robust development environment.</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <div>
+                        <img class="banner-img"
+                            src="https://img.freepik.com/free-vector/organic-flat-people-business-training-illustration_23-2148915054.jpg?size=626&ext=jpg&ga=GA1.1.1448711260.1706918400&semt=ais" />
+                    </div>
+                </div>
+                </section>
+
+                <section id="upcoming-events" class="upcoming-events">
+                    <div class="featured-screen">
+                        <img class="banner-img"
+                            src="https://media.istockphoto.com/id/1153816876/photo/smiling-group-of-people-walking-together-outdoors.jpg?s=612x612&w=0&k=20&c=fmWuzI08_wlIHy2Y3Ovs0ZnZgtMPYKN3ecHML51qw78=" />
+                    </div>
+                    <div >
+                    <h2>Upcoming Events</h2>
+                    <div class="featured-mobile">
+                        <img class="banner-img" src="https://i.pinimg.com/736x/51/cc/a9/51cca97663d4c41e8740a1a8f319f881.jpg"/>
+                    </div>
+                    <h1>Unity Nexus Showcase 2024</h1>
+
+                    <h2>Event Details</h2>
+                    <p><strong>Date:</strong> March 15, 2024</p>
+                    <p><strong>Location:</strong> Virtual</p>
+                    <p><strong>Description:</strong> Join us for an exciting showcase of the latest Unity Nexus features and innovations. Discover new tools, connect with Unity experts, and explore the future of game development.</p>
+                
+                    <h2>Speakers</h2>
+                    <div id="speakers"></div>
+                
+                    <h2>Agenda</h2>
+                    <div id="agenda"></div>
+                </div>
+                </section>
+            </div>
+            <div class="footer">
+            <footer>
+                <p>&copy; 2024 Community Hub. All rights reserved.</p>
+            </footer>
+        </div>
+
+            <!-- The cursor elements -->
+            <div class="cursor cursor--small"></div>
+            <canvas class="cursor cursor--canvas" resize></canvas>
+
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.0/paper-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"></script>
+    <script>
+        // set the starting position of the cursor outside of the screen
+        let clientX = 100;
+        let clientY = 100;
+        const innerCursor = document.querySelector(".cursor--small");
+
+        const initCursor = () => {
+            // add listener to track the current mouse position
+            document.addEventListener("mousemove", (e) => {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            });
+
+            // transform the innerCursor to the current mouse position
+            // use requestAnimationFrame() for smooth performance
+            const render = () => {
+                innerCursor.style.transform = `translate(${clientX}px, ${clientY}px)`;
+                requestAnimationFrame(render);
+            };
+            requestAnimationFrame(render);
+        };
+
+        initCursor();
+
+        let lastX = 0;
+        let lastY = 0;
+        let isStuck = false;
+        let showCursor = false;
+        let group, stuckX, stuckY, fillOuterCursor;
+
+        const initCanvas = () => {
+            const canvas = document.querySelector(".cursor--canvas");
+            const shapeBounds = {
+                width: 75,
+                height: 75,
+            };
+            paper.setup(canvas);
+            const strokeColor = "rgba(0, 0, 0, 0.5)";
+            const strokeWidth = 1;
+            const segments = 8;
+            const radius = 20;
+
+            // we'll need these later for the noisy circle
+            const noiseScale = 150; // speed
+            const noiseRange = 4; // range of distortion
+            let isNoisy = false; // state
+
+            // the base shape for the noisy circle
+            const polygon = new paper.Path.RegularPolygon(new paper.Point(0, 0), segments, radius);
+            polygon.strokeColor = strokeColor;
+            polygon.strokeWidth = strokeWidth;
+            polygon.smooth();
+            group = new paper.Group([polygon]);
+            group.applyMatrix = false;
+
+            const noiseObjects = polygon.segments.map(() => new SimplexNoise());
+            let bigCoordinates = [];
+
+            // function for linear interpolation of values
+            const lerp = (a, b, n) => {
+                return (1 - n) * a + n * b;
+            };
+
+            // function to map a value from one range to another range
+            const map = (value, in_min, in_max, out_min, out_max) => {
+                return ((value - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
+            };
+
+            // the draw loop of Paper.js
+            // (60fps with requestAnimationFrame under the hood)
+            paper.view.onFrame = (event) => {
+                // using linear interpolation, the circle will move 0.2 (20%)
+                // of the distance between its current position and the mouse
+                // coordinates per Frame
+                lastX = lerp(lastX, clientX, 0.2);
+                lastY = lerp(lastY, clientY, 0.2);
+                group.position = new paper.Point(lastX, lastY);
+            };
+        };
+
+        initCanvas();
+        const speakers = [
+            { name: "John Developer", title: "Lead Unity Engineer", company: "Unity Technologies" },
+            { name: "Jane Artist", title: "Senior 3D Artist", company: "Awesome Game Studio" }
+        ];
+
+        const agenda = [
+            { time: "10:00 AM", activity: "Keynote Address" },
+            { time: "11:30 AM", activity: "Unity Nexus Feature Demos" },
+            { time: "1:00 PM", activity: "Panel Discussion: Future Trends in Game Development" },
+            { time: "3:00 PM", activity: "Networking and Q&A" }
+        ];
+
+        // Function to create speaker HTML
+        const createSpeakerHTML = (speaker) => `
+            <div class="speaker">
+                <p><strong>Name:</strong> ${speaker.name}</p>
+                <p><strong>Title:</strong> ${speaker.title}</p>
+                <p><strong>Company:</strong> ${speaker.company}</p>
+            </div>
+        `;
+
+        // Function to create agenda item HTML
+        const createAgendaItemHTML = (item) => `
+            <div class="agenda-item">
+                <p><strong>Time:</strong> ${item.time}</p>
+                <p><strong>Activity:</strong> ${item.activity}</p>
+            </div>
+        `;
+
+        // Render speakers
+        document.getElementById('speakers').innerHTML = speakers.map(createSpeakerHTML).join('');
+
+        // Render agenda items
+        document.getElementById('agenda').innerHTML = agenda.map(createAgendaItemHTML).join('');
+    </script>
+</body>
+
+</html>

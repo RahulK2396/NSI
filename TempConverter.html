@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+
+    input, select, button {
+      margin: 10px;
+      padding: 5px;
+    }
+
+    #result {
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Temperature Converter</h1>
+
+  <label for="temperature">Enter Temperature:</label>
+  <input type="text" id="temperature" placeholder="Enter temperature" required>
+  
+  <label for="unit">Choose Unit:</label>
+  <select id="unit">
+    <option value="celsius">Celsius</option>
+    <option value="fahrenheit">Fahrenheit</option>
+  </select>
+
+  <button onclick="convertTemperature()">Convert</button>
+
+  <div id="result"></div>
+
+  <script>
+    function convertTemperature() {
+      var temperatureInput = document.getElementById("temperature").value;
+      var unit = document.getElementById("unit").value;
+      var resultArea = document.getElementById("result");
+
+      // Validate input as a number
+      if (isNaN(temperatureInput)) {
+        resultArea.textContent = "Please enter a valid number for temperature.";
+        return;
+      }
+
+      // Convert temperature based on the selected unit
+      var convertedTemperature = (unit === "celsius") ? fahrenheitToCelsius(temperatureInput) : celsiusToFahrenheit(temperatureInput);
+
+      resultArea.textContent = `Converted Temperature: ${convertedTemperature} °${unit.toUpperCase()}`;
+    }
+
+    function fahrenheitToCelsius(fahrenheit) {
+      return ((fahrenheit - 32) * 5 / 9).toFixed(2);
+    }
+
+    function celsiusToFahrenheit(celsius) {
+      return ((celsius * 9 / 5) + 32).toFixed(2);
+    }
+  </script>
+
+</body>
+</html>
